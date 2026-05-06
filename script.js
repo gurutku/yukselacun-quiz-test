@@ -533,6 +533,24 @@ function submitAnswer(){
     showCorrectThenNext(correctRaw);
   }
 }
+// --- Pas (skip) fonksiyonu ---
+function skipQuestion(){
+  if(current >= gameQuestions.length) return;
+
+  if(passesLeft <= 0){
+    showFeedback(false, 'Pas hakkın kalmadı');
+    return;
+  }
+
+  passesLeft--;
+  passCount++;
+  el('passesLeft').textContent = passesLeft;
+  playPass();
+
+  clearInterval(timerInterval);
+  current++;
+  setTimeout(loadQuestion, 250);
+}
 
 /* Yanlışta doğruyu kırmızı göster, 2s sonra sonraki soru */
 function showCorrectThenNext(correctRaw){
