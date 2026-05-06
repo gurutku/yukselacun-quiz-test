@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <title>Kaçış Odası — YKS Stilinde Test (25 Soru)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="page">
+    <div class="centerCard">
+      <!-- Giriş -->
+      <section id="giris" class="card active">
+        <h1>KAÇIŞ ODASI — SINAV MODU</h1>
+        <p class="lead">25 soruluk YKS tarzı test. Her soru 30 saniye. Doğru +5, Pas 0 (2 hak), Yanlış -2.</p>
+
+        <label for="inputName">Ad Soyad</label>
+        <input id="inputName" placeholder="Ad Soyad" autocomplete="off">
+
+        <label for="inputClass">Sınıf</label>
+        <input id="inputClass" placeholder="Örn: 11/A" autocomplete="off">
+
+        <div class="controls">
+          <button id="startBtn">Oyuna Başla</button>
+          <button id="musicToggle" class="muted">Müziği Aç</button>
+          <button id="howBtn" class="muted">Nasıl Oynanır?</button>
+        </div>
+
+        <div id="recentScores" class="scores" aria-live="polite"></div>
+        <p class="muted small">Skorlar tarayıcıda saklanır. Her oyun havuzdan rastgele sorular çeker.</p>
+      </section>
+
+      <!-- Soru ekranı -->
+      <section id="soruEkrani" class="card">
+        <div class="topbarRow">
+          <div id="qIndex" class="qIndex">1 / 25</div>
+          <div class="rightTop">
+            <div id="branchTag" class="tag">Branş</div>
+            <div id="branchVisual" class="branchVisual" aria-hidden="true" style="display:none;">
+              <img id="branchImage" src="" alt="">
+            </div>
+          </div>
+        </div>
+
+        <h2 id="questionText" class="question">Soru metni buraya gelecek</h2>
+
+        <div class="timerRow">
+          <div class="circleTimer" id="circleTimer" aria-hidden="true">
+            <svg viewBox="0 0 120 120" role="img" aria-label="Sayaç">
+              <defs>
+                <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#ffb703"/>
+                  <stop offset="100%" stop-color="#ff8a00"/>
+                </linearGradient>
+              </defs>
+              <circle cx="60" cy="60" r="50" class="bg"></circle>
+              <circle cx="60" cy="60" r="50" class="progress" id="progressCircle"></circle>
+              <text x="60" y="66" text-anchor="middle" id="timeText">30</text>
+            </svg>
+          </div>
+
+          <div class="controlsInline">
+            <input id="answerInput" class="answerBox" placeholder="Cevabını yaz (ör: 42 veya 3/4 veya 9.8)" autocomplete="off" aria-label="Cevap kutusu">
+            <div class="metaRow">
+              <div class="passes">Kalan Pas: <span id="passesLeft">2</span></div>
+              <div class="score">Puan: <span id="currentScore">0</span></div>
+            </div>
+            <div class="btnRow">
+              <button id="submitBtn">Onayla</button>
+              <button id="skipBtn" class="muted">Pas</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+      </section>
+
+      <!-- Sonuç ekranı -->
+      <section id="sonuc" class="card">
+        <h1>Oyun Sonu</h1>
+        <div class="result">
+          <div class="trophy">🏆</div>
+          <p><strong id="resName">İsim</strong> — <span id="resClass">Sınıf</span></p>
+          <p id="resSummary">Toplam: <strong id="resScore">0</strong> puan</p>
+          <ul id="resBreakdown" class="breakdown"></ul>
+        </div>
+
+        <h3>Son Kayıtlar</h3>
+        <div id="scoreList" class="scores"></div>
+
+        <div class="controls">
+          <button id="retryBtn">Tekrar Oyna</button>
+          <button id="homeBtn" class="muted">Ana Menü</button>
+        </div>
+      </section>
+
+      <!-- Nasıl oynanır modal -->
+      <div id="modal" class="modal" aria-hidden="true">
+        <div class="modalCard" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+          <h3 id="modalTitle">Nasıl Oynanır</h3>
+          <ul class="smallList">
+            <li>Her soru için 30 saniyen var; sayaç dairesel olarak geri akar.</li>
+            <li>Süre dolarsa soru yanlış sayılır ve sonraki soruya geçilir (−2 puan).</li>
+            <li>Doğru cevap +5 puan. Pas 0 puan (2 pas hakkın var).</li>
+            <li>Toplam 25 soru; her oyun branş havuzundan rastgele sorular çeker.</li>
+            <li>Yanlış cevap verildiğinde doğru cevap kırmızıyla 2 saniye gösterilir.</li>
+          </ul>
+          <div class="controls"><button id="closeModal">Kapat</button></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
